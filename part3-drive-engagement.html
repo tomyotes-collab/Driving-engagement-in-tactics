@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Part 3: How to Drive Engagement — MKTG 1419 Week 8</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d1117;
+    --bg: #f4faf7;
+    --card: #ffffff;
+    --accent: #059669;
+    --accent2: #0ea5e9;
+    --warn: #f59e0b;
+    --muted: #64748b;
+    --fail: #ef4444;
+    --success: #22c55e;
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+
+  header {
+    background: linear-gradient(135deg, #052e16 0%, #064e3b 55%, #065f46 100%);
+    color: #fff;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+  header .eyebrow { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: #6ee7b7; margin-bottom: 0.6rem; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.15; }
+  header h1 em { color: #34d399; font-style: normal; }
+  header p { margin-top: 0.9rem; color: #a7f3d0; font-size: 0.95rem; max-width: 520px; margin-inline: auto; }
+
+  .container { max-width: 820px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: #d1fae5; }
+
+  /* FOUR PILLARS */
+  .pillar-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.1rem; margin-bottom: 2.5rem; }
+  @media(max-width:560px) { .pillar-grid { grid-template-columns: 1fr; } }
+
+  .pillar-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.4rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    border-top: 4px solid var(--accent);
+  }
+  .pillar-card:nth-child(2) { border-color: var(--accent2); }
+  .pillar-card:nth-child(3) { border-color: var(--warn); }
+  .pillar-card:nth-child(4) { border-color: #8b5cf6; }
+
+  .pillar-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.7rem; }
+  .pillar-card ul { padding-left: 1rem; font-size: 0.84rem; color: var(--muted); }
+  .pillar-card ul li { margin-bottom: 0.35rem; }
+  .pillar-card .eg {
+    display: inline-block; font-size: 0.75rem; background: var(--bg);
+    border-radius: 6px; padding: 0.28rem 0.6rem; margin-top: 0.7rem; font-weight: 600; color: var(--ink);
+  }
+
+  /* PLATFORM COMPARISON */
+  .platform-table { width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+  .platform-table th { background: var(--ink); color: #fff; padding: 0.75rem 1rem; font-size: 0.82rem; text-align: left; }
+  .platform-table td { padding: 0.75rem 1rem; font-size: 0.83rem; border-bottom: 1px solid #ecfdf5; }
+  .platform-table tr:last-child td { border-bottom: none; }
+  .platform-table tr:hover td { background: #f0fdf4; }
+  .badge { display: inline-block; border-radius: 20px; padding: 0.18rem 0.55rem; font-size: 0.72rem; font-weight: 700; }
+  .badge.high { background: #dcfce7; color: #15803d; }
+  .badge.med { background: #fef3c7; color: #92400e; }
+  .badge.low { background: #fee2e2; color: #991b1b; }
+  .badge.note { background: #e0f2fe; color: #0369a1; }
+
+  /* ── ACTIVITY 1: Scenario Verdict ── */
+  .activity-box { background: var(--ink); color: #fff; border-radius: 16px; padding: 2rem; margin-bottom: 2rem; }
+  .activity-box h2 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.3rem; }
+  .activity-box .sub { color: #94a3b8; font-size: 0.85rem; margin-bottom: 1.6rem; }
+
+  /* ── ORDER THE STEPS ── */
+  .order-instructions { font-size: 0.86rem; color: #94a3b8; margin-bottom: 1rem; }
+  .sortable-list { display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .order-item {
+    background: #1e293b;
+    border: 2px solid #334155;
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    font-size: 0.85rem;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    user-select: none;
+    transition: border-color 0.2s;
+  }
+  .order-item:hover { border-color: #4ade80; }
+  .order-item.dragging { opacity: 0.4; }
+  .order-item.drag-over { border-color: #86efac; background: #162032; }
+  .order-item .num {
+    width: 28px; height: 28px; border-radius: 50%; background: #334155;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.78rem; font-weight: 700; color: #94a3b8; flex-shrink: 0;
+  }
+  .order-item.correct-pos .num { background: rgba(34,197,94,0.3); color: #86efac; }
+  .order-item.wrong-pos .num { background: rgba(239,68,68,0.2); color: #fca5a5; }
+
+  .check-btn {
+    margin-top: 1.2rem;
+    background: var(--accent); color: #fff; border: none; border-radius: 8px;
+    padding: 0.65rem 1.5rem; font-size: 0.92rem; font-weight: 700;
+    cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.2s;
+  }
+  .check-btn:hover { opacity: 0.88; }
+  .reset-btn {
+    margin-top: 1.2rem; margin-left: 0.7rem;
+    background: transparent; color: #94a3b8; border: 1px solid #334155;
+    border-radius: 8px; padding: 0.65rem 1rem; font-size: 0.84rem;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+  }
+  #order-feedback { margin-top: 1rem; font-size: 0.88rem; min-height: 1.4rem; }
+  .fb-ok { color: #86efac; }
+  .fb-err { color: #fca5a5; }
+
+  /* ── TRUE / FALSE QUIZ ── */
+  .tf-list { display: flex; flex-direction: column; gap: 1rem; }
+  .tf-item { background: #1e293b; border-radius: 10px; padding: 1rem 1.1rem; }
+  .tf-statement { font-size: 0.88rem; margin-bottom: 0.7rem; color: #e2e8f0; }
+  .tf-btns { display: flex; gap: 0.6rem; }
+  .tf-btn {
+    background: #334155; color: #e2e8f0; border: none; border-radius: 6px;
+    padding: 0.4rem 1rem; font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: background 0.2s;
+  }
+  .tf-btn:hover { background: #475569; }
+  .tf-btn.correct { background: #15803d; color: #fff; }
+  .tf-btn.incorrect { background: #991b1b; color: #fff; }
+  .tf-btn.reveal-correct { background: #166534; color: #86efac; }
+  .tf-explain { font-size: 0.8rem; color: #94a3b8; margin-top: 0.6rem; display: none; }
+  .tf-explain.visible { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">MKTG 1419 · Week 8 · Part 3 of 3</div>
+  <h1>How to Drive <em>Engagement</em> in Tactics</h1>
+  <p>Research-backed levers for more likes, comments, shares, and clicks — and how to put them in the right order.</p>
+</header>
+
+<div class="container">
+
+  <!-- FOUR PILLARS -->
+  <div style="margin-bottom:2.5rem;">
+    <div class="section-label">Four evidence-based pillars</div>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <h3>🎬 Content & Format</h3>
+        <ul>
+          <li>Rich media (photo/video) beats plain text</li>
+          <li>Action-oriented posts (contests, challenges) drive participation</li>
+          <li>Emotional/transformational appeals outperform purely rational content</li>
+          <li>Content quality matters more than sheer volume</li>
+        </ul>
+        <span class="eg">🧃 Coca-Cola's "Share a Coke" — emotional + participatory</span>
+      </div>
+      <div class="pillar-card">
+        <h3>📱 Platform, Timing & Frequency</h3>
+        <ul>
+          <li>TikTok & Instagram yield higher interaction rates than most other platforms</li>
+          <li>Weekday posts can outperform weekends on Facebook</li>
+          <li>Posting more ≠ more engagement unless quality stays high</li>
+          <li>Platform choice alone can lift engagement beyond changing content style</li>
+        </ul>
+        <span class="eg">⚽ Football clubs posting match-day content on TikTok vs Facebook</span>
+      </div>
+      <div class="pillar-card">
+        <h3>💬 Interaction & Community</h3>
+        <ul>
+          <li>Replying to comments builds trust and grows engagement</li>
+          <li>Asking questions reliably boosts comment volume</li>
+          <li>Peer-to-peer discussion (Q&A, group moderators) deepens participation</li>
+          <li>Personalised responses > generic auto-replies</li>
+        </ul>
+        <span class="eg">🏋️ FLEX Saigon replying to every comment on a "your first week" Reel</span>
+      </div>
+      <div class="pillar-card">
+        <h3>📊 Data-Driven Optimisation</h3>
+        <ul>
+          <li>Analytics & predictive models can significantly lift click-through rates</li>
+          <li>Test formats, topics, and timings continuously</li>
+          <li>Adjust content mix, platforms, and posting schedule based on performance data</li>
+        </ul>
+        <span class="eg">📈 A/B testing two Instagram carousel versions for Volt Energy Drink</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM COMPARISON TABLE -->
+  <div style="margin-bottom:2.5rem;">
+    <div class="section-label">Platform comparison at a glance</div>
+    <table class="platform-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Best for</th>
+          <th>Engagement rate</th>
+          <th>Best format</th>
+          <th>Watch out</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>TikTok</strong></td>
+          <td>Short video, Gen Z, viral reach</td>
+          <td><span class="badge high">High</span></td>
+          <td>Short-form video (≤60 sec)</td>
+          <td><span class="badge note">Context-dependent</span></td>
+        </tr>
+        <tr>
+          <td><strong>Instagram</strong></td>
+          <td>Visual brands, lifestyle, Reels</td>
+          <td><span class="badge high">High</span></td>
+          <td>Reels + Carousel</td>
+          <td>Algorithm favours video over static</td>
+        </tr>
+        <tr>
+          <td><strong>Facebook</strong></td>
+          <td>Community, older demographics, events</td>
+          <td><span class="badge med">Medium</span></td>
+          <td>Video + text posts</td>
+          <td>Weekends can underperform vs weekdays</td>
+        </tr>
+        <tr>
+          <td><strong>LinkedIn</strong></td>
+          <td>B2B, thought leadership, hiring</td>
+          <td><span class="badge med">Medium</span></td>
+          <td>Articles + text + document posts</td>
+          <td>Low tolerance for hard-sell tactics</td>
+        </tr>
+        <tr>
+          <td><strong>YouTube</strong></td>
+          <td>Long-form, tutorials, brand storytelling</td>
+          <td><span class="badge low">Lower</span></td>
+          <td>Long-form + Shorts</td>
+          <td>High production time investment</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ACTIVITY 1: Order the steps to build an engaging tactic -->
+  <div class="activity-box">
+    <h2>Put the Steps in Order 🔢</h2>
+    <div class="sub">Drag the steps below into the correct sequence for building an engagement-optimised tactic. The right order follows the research-backed framework from the lecture.</div>
+    <div class="order-instructions">Drag items up or down to reorder:</div>
+
+    <div class="sortable-list" id="sortable">
+      <!-- Correct order: 1=Identify audience trait, 2=Choose sub-key message, 3=Select platform, 4=Choose format, 5=Set posting timing, 6=Plan community response, 7=Measure & optimise -->
+      <div class="order-item" draggable="true" data-correct="5"><span class="num">?</span>Set the posting day/time based on when your audience is most active</div>
+      <div class="order-item" draggable="true" data-correct="3"><span class="num">?</span>Select the platform that delivers the highest engagement rate for this content type</div>
+      <div class="order-item" draggable="true" data-correct="7"><span class="num">?</span>Measure performance with analytics and adjust content mix, format, and frequency</div>
+      <div class="order-item" draggable="true" data-correct="2"><span class="num">?</span>Craft the sub-key message this tactic will deliver</div>
+      <div class="order-item" draggable="true" data-correct="6"><span class="num">?</span>Plan how you will respond to comments and invite further conversation</div>
+      <div class="order-item" draggable="true" data-correct="1"><span class="num">?</span>Identify your audience's trait (involvement, knowledge, self-construal)</div>
+      <div class="order-item" draggable="true" data-correct="4"><span class="num">?</span>Choose the format that matches the message (video, carousel, UGC, etc.)</div>
+    </div>
+
+    <div>
+      <button class="check-btn" onclick="checkOrder()">Check order</button>
+      <button class="reset-btn" onclick="resetOrder()">Reset</button>
+    </div>
+    <div id="order-feedback"></div>
+  </div>
+
+  <!-- ACTIVITY 2: True / False -->
+  <div class="activity-box">
+    <h2>True or False? 🤔</h2>
+    <div class="sub">Test your recall of the research findings. Click True or False for each statement.</div>
+    <div class="tf-list">
+
+      <div class="tf-item" data-answer="false">
+        <div class="tf-statement">Posting more often always leads to higher engagement, regardless of content quality.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="answerTF(this, 'true')">True</button>
+          <button class="tf-btn" onclick="answerTF(this, 'false')">False</button>
+        </div>
+        <div class="tf-explain">❌ False — research shows higher frequency only helps when content quality stays high. Quality beats quantity every time.</div>
+      </div>
+
+      <div class="tf-item" data-answer="true">
+        <div class="tf-statement">Emotional and transformational content tends to generate more engagement than purely rational content.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="answerTF(this, 'true')">True</button>
+          <button class="tf-btn" onclick="answerTF(this, 'false')">False</button>
+        </div>
+        <div class="tf-explain">✅ True — multiple studies (Drossos et al. 2023; Shahbaznezhad et al. 2021) confirm emotional/transformational appeals outperform rational-only content in engagement metrics.</div>
+      </div>
+
+      <div class="tf-item" data-answer="false">
+        <div class="tf-statement">Weekends consistently outperform weekdays for positive reactions on Facebook across all industries.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="answerTF(this, 'true')">True</button>
+          <button class="tf-btn" onclick="answerTF(this, 'false')">False</button>
+        </div>
+        <div class="tf-explain">❌ False — research (Drossos et al. 2023) found weekday posts can actually outperform weekend posts for positive reactions on Facebook. Timing depends on your specific audience.</div>
+      </div>
+
+      <div class="tf-item" data-answer="true">
+        <div class="tf-statement">Switching to a more engaging platform (e.g., TikTok) can increase engagement more than changing content style alone.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="answerTF(this, 'true')">True</button>
+          <button class="tf-btn" onclick="answerTF(this, 'false')">False</button>
+        </div>
+        <div class="tf-explain">✅ True — Shen (2023) found that for some brands, the platform choice itself was a bigger driver of engagement than content style adjustments.</div>
+      </div>
+
+      <div class="tf-item" data-answer="true">
+        <div class="tf-statement">Asking questions in posts reliably boosts the number of comments and conversations.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="answerTF(this, 'true')">True</button>
+          <button class="tf-btn" onclick="answerTF(this, 'false')">False</button>
+        </div>
+        <div class="tf-explain">✅ True — confirmed by Moran et al. (2019), Sivaratnam et al. (2021), and Veale et al. (2015). Interactive prompts and questions are one of the most reliable engagement tactics.</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── Drag-to-reorder ──
+const sortable = document.getElementById('sortable');
+let dragItem = null;
+
+sortable.querySelectorAll('.order-item').forEach(item => {
+  item.addEventListener('dragstart', () => {
+    dragItem = item;
+    setTimeout(() => item.classList.add('dragging'), 0);
+  });
+  item.addEventListener('dragend', () => {
+    item.classList.remove('dragging', 'drag-over');
+    dragItem = null;
+  });
+  item.addEventListener('dragover', e => {
+    e.preventDefault();
+    if (dragItem && dragItem !== item) {
+      item.classList.add('drag-over');
+      const items = [...sortable.querySelectorAll('.order-item')];
+      const dragIdx = items.indexOf(dragItem);
+      const targetIdx = items.indexOf(item);
+      if (dragIdx < targetIdx) {
+        sortable.insertBefore(dragItem, item.nextSibling);
+      } else {
+        sortable.insertBefore(dragItem, item);
+      }
+    }
+  });
+  item.addEventListener('dragleave', () => item.classList.remove('drag-over'));
+});
+
+function checkOrder() {
+  const items = [...sortable.querySelectorAll('.order-item')];
+  let correct = 0;
+  items.forEach((item, idx) => {
+    item.classList.remove('correct-pos', 'wrong-pos');
+    const num = item.querySelector('.num');
+    if (parseInt(item.dataset.correct) === idx + 1) {
+      item.classList.add('correct-pos');
+      num.textContent = idx + 1;
+      correct++;
+    } else {
+      item.classList.add('wrong-pos');
+      num.textContent = idx + 1;
+    }
+  });
+  const fb = document.getElementById('order-feedback');
+  if (correct === 7) {
+    fb.textContent = '🎉 Perfect order! That\'s exactly the research-backed sequence.';
+    fb.className = 'fb-ok';
+  } else {
+    fb.textContent = `${correct}/7 in the right position — items in red are out of place. Try again!`;
+    fb.className = 'fb-err';
+  }
+}
+
+function resetOrder() {
+  const items = [...sortable.querySelectorAll('.order-item')];
+  // Shuffle
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    sortable.insertBefore(items[j], sortable.children[i]);
+  }
+  items.forEach(item => {
+    item.classList.remove('correct-pos', 'wrong-pos');
+    item.querySelector('.num').textContent = '?';
+  });
+  document.getElementById('order-feedback').textContent = '';
+}
+
+// ── True / False ──
+function answerTF(btn, answer) {
+  const item = btn.closest('.tf-item');
+  if (item.dataset.answered) return;
+  item.dataset.answered = 'true';
+
+  const correct = item.dataset.answer;
+  const explain = item.querySelector('.tf-explain');
+  const allBtns = item.querySelectorAll('.tf-btn');
+
+  allBtns.forEach(b => b.disabled = true);
+
+  if (answer === correct) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('incorrect');
+    allBtns.forEach(b => {
+      if (b.textContent.trim().toLowerCase() === correct) b.classList.add('reveal-correct');
+    });
+  }
+  explain.classList.add('visible');
+}
+</script>
+
+  <!-- REFERENCES -->
+  <div style="margin-top:2.5rem;">
+    <div class="section-label">References</div>
+    <div style="background:var(--card); border-radius:12px; padding:1.4rem 1.6rem; box-shadow:0 1px 4px rgba(0,0,0,0.07);">
+      <p style="font-size:0.78rem; color:var(--muted); line-height:1.8; font-family:'DM Sans',sans-serif;">
+        Drossos, D., Coursaris, C., &amp; Kagiouli, E. (2023). Social media marketing content strategy: A comprehensive framework and empirically supported guidelines for brand posts on Facebook pages. <em>Journal of Consumer Behaviour.</em> <a href="https://doi.org/10.1002/cb.2269" target="_blank" style="color:var(--accent);">https://doi.org/10.1002/cb.2269</a>
+        <br><br>
+        Moran, G., Muzellec, L., &amp; Johnson, D. (2019). Message content features and social media engagement: evidence from the media industry. <em>Journal of Product &amp; Brand Management.</em> <a href="https://doi.org/10.1108/jpbm-09-2018-2014" target="_blank" style="color:var(--accent);">https://doi.org/10.1108/jpbm-09-2018-2014</a>
+        <br><br>
+        Shahbaznezhad, H., Dolan, R., &amp; Rashidirad, M. (2021). The role of social media content format and platform in users' engagement behavior. <em>Journal of Interactive Marketing, 53,</em> 47–65. <a href="https://doi.org/10.1016/j.intmar.2020.05.001" target="_blank" style="color:var(--accent);">https://doi.org/10.1016/j.intmar.2020.05.001</a>
+        <br><br>
+        Shen, Z. (2023). Platform or content strategy? Exploring engagement with brand posts on different social media platforms. <em>SAGE Open, 13.</em> <a href="https://doi.org/10.1177/21582440231219096" target="_blank" style="color:var(--accent);">https://doi.org/10.1177/21582440231219096</a>
+        <br><br>
+        Sivaratnam, S., Hwang, K., Chee-A-Tow, A., Ren, L., Fang, G., &amp; Jibb, L. (2021). Using social media to engage knowledge users in health research priority setting: Scoping review. <em>Journal of Medical Internet Research, 24.</em> <a href="https://doi.org/10.2196/29821" target="_blank" style="color:var(--accent);">https://doi.org/10.2196/29821</a>
+        <br><br>
+        Veale, H., Sacks-Davis, R., Weaver, E., Pedrana, A., Stoové, M., &amp; Hellard, M. (2015). The use of social networking platforms for sexual health promotion: identifying key strategies for successful user engagement. <em>BMC Public Health, 15.</em> <a href="https://doi.org/10.1186/s12889-015-1396-z" target="_blank" style="color:var(--accent);">https://doi.org/10.1186/s12889-015-1396-z</a>
+      </p>
+    </div>
+  </div>
+
+</div>
+</script>
+</body>
+</html>
